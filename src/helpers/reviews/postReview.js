@@ -1,9 +1,9 @@
 import { productsApi } from "../../api/productsApi"
 
-export const getAllProducts= async ()=>{
+export const postReview= async (review)=>{
     try{
 
-        const resp = await productsApi.get(`/products/all`)
+        const resp = await productsApi.post(`/reviews`,review)
         return resp.data
 
     }catch(error){

@@ -50,18 +50,15 @@ const login = (email,pass) => {
 }
 
 
-function validateUser() {
-  //validar si el usuario que se esta inscribiendo tiene toda la info correcta
+  function validateUser() {
+    //validar si el usuario que se esta inscribiendo tiene toda la info correcta
 
-  //retornar true si estan correctas y false en el otro caso
-}
-
-
+    //retornar true si estan correctas y false en el otro caso
+  }
 
   return (
     <div>
-<h1 style={{color:"white"}}>asdasd</h1>
-
+      <h1 style={{color:"white"}}>asdasd</h1>
     </div>
   )
 }

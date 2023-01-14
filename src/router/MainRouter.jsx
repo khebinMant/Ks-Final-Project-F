@@ -1,45 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { CategoryPage } from '../pages/admin/CategoryPage'
 import { LoginPage } from '../pages/login/LoginPage'
 import { ProductPage } from '../pages/admin/ProductPage'
 import { MainPage } from '../pages/customer/MainPage'
 import { useSelector } from 'react-redux'
+import { SearchProductPage } from '../pages/customer/SearchProductPage'
+import { SelectedProductPage } from '../pages/customer/SelectedProductPage'
 
 
 export const MainRouter = () => {
 
-  //const [isLoged, setIsLoged] = useState(true)
-  const currentUser = useSelector((state) => state.users.currentUser);
-
-
-
+  const [isLoged, setIsLoged] = useState(true)
+  // const currentUser = useSelector((state) => state.users.currentUser);
 
   return (
     <div>
 
       {
-        currentUser
+        isLoged
           ?
           <Routes>
             {/* Si esta logeado y es ADMIN */}
-            <Route path='/*' element={<ProductPage />} />
+            {/* <Route path='/*' element={<ProductPage />} /> */}
             <Route path='/products' element={<ProductPage />} />
-            <Route path='/categories' element={<CategoryPage />} />
 
             {/* Si esta logeado y es USER */}
             <Route path='/main' element={<MainPage />} />
+            <Route path='/search' element={<SearchProductPage />} />
+            <Route path='/product/:id' element={<SelectedProductPage />} />
 
           </Routes> :
           <Routes>
-            <Route path='*' element={<LoginPage />} />
+            <Route path='/login' element={<LoginPage />} />
           </Routes>
 
-
       }
-
-
-
 
     </div>
   )

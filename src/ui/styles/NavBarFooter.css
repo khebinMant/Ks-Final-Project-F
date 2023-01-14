@@ -1,0 +1,148 @@
+.user-avatar{
+    top: 0;
+    right: 0;
+    margin: 10px 5px;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+}
+.search-input{
+    left: 50px;
+}
+.something{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.nav-bar{
+    background-color: #1B0E27;
+    -webkit-box-shadow: 10px 11px 37px -6px #020F2A;
+    -moz-box-shadow: 10px 11px 37px -6px #020F2A;
+    box-shadow: 10px 11px 37px -6px #020F2A;
+}
+
+/* MODAL STYLES */
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}  
+
+.cardModalContainer{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBox{
+    width: 40%;
+    height: 75%;
+    background: linear-gradient(71.93deg,#001b33 26.34%,#004887 56.72%,#273b49 94.79%);
+    box-shadow: 10px 11px 17px -6px rgb(52, 10, 80);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.back2{
+    transform: rotateY(-180deg);
+    text-align: center;
+    opacity: 100%;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+    cursor: pointer;
+}
+.front2, .back2{
+    margin: 0px 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-box-shadow: 10px 11px 17px -6px rgb(89, 94, 102);
+    -moz-box-shadow: 10px 11px 17px -6px rgb(98, 105, 116);
+    box-shadow: 10px 11px 17px -6px rgb(83, 93, 107);
+    border-style: solid;
+    border-width: 1px;
+    border-color: #343E4D;
+    transition: 1.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: linear-gradient(71.93deg,#4f0c7c 26.34%,#2f8ada 56.72%,#a2c0d4 94.79%);
+    background-size: 600px 100%;
+    background-position: center;
+}
+
+.image-card2{
+    width: 100%;
+    object-fit:cover;
+    height: 100%;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+    cursor: pointer;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.mapCardContainer{
+    display: flex;
+    flex-direction: row;
+}
+.products-txtB{
+    overflow: hidden;
+}
+
+.iconCardContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.location{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+@media only screen and (max-width:600px) {
+    .mapCardContainer{
+        flex-direction: column;
+        width: 58%;
+        align-self: center;
+        
+    }
+    .modalBox{
+        width: 90%;
+        height: 60%;
+        
+    }
+}

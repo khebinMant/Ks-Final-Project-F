@@ -18,6 +18,7 @@ import { postProduct } from "../../helpers/products/postProduct";
 import { getAllCategories } from "../../helpers/categories/getAllCategories";
 import { deleteProduct } from "../../helpers/products/deleteProduct";
 import { putProduct } from "../../helpers/products/putProduct";
+import { ShoopingLayout } from "../../ui/ShoopingLayout";
 
 let emptyProduct = {
   name: "",
@@ -347,240 +348,247 @@ export const ProductPage = () => {
     </>
   );
 
-  return isLoading ? (
-    <Checking />
-  ) : (
-    <div className="datatable-crud-demo">
-      <Toast ref={toast} />
-
-      <div className="card">
-        <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
-
-        <DataTable
-          ref={dt}
-          value={products}
-          selection={selectedProducts}
-          onSelectionChange={(e) => setSelectProducts(e.value)}
-          dataKey="id"
-          paginator
-          rows={10}
-          rowsPerPageOptions={[5, 10, 25]}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="{first} - {last} de {totalRecords} productos"
-          globalFilter={globalFilter}
-          header={header}
-          responsiveLayout="scroll"
+  return (
+    <ShoopingLayout>
+    {
+      isLoading ? (
+      <Checking />
+    ) : (
+      <div className="datatable-crud-demo">
+        <Toast ref={toast} />
+  
+        <div className="card">
+          <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+  
+          <DataTable
+            ref={dt}
+            value={products}
+            selection={selectedProducts}
+            onSelectionChange={(e) => setSelectProducts(e.value)}
+            dataKey="id"
+            paginator
+            rows={10}
+            rowsPerPageOptions={[5, 10, 25]}
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            currentPageReportTemplate="{first} - {last} de {totalRecords} productos"
+            globalFilter={globalFilter}
+            header={header}
+            responsiveLayout="scroll"
+          >
+            <Column
+              selectionMode="multiple"
+              headerStyle={{ width: "1rem" }}
+              exportable={false}
+            ></Column>
+            <Column
+              field="id"
+              header="Id"
+              sortable
+              style={{ minWidth: "1rem" }}
+            ></Column>
+            <Column
+              field="image"
+              header="Image"
+              body={imageBodyTemplate}
+            ></Column>
+            <Column
+              field="name"
+              header="Nombre"
+              sortable
+              style={{ minWidth: "2rem" }}
+            ></Column>
+            <Column
+              field="description"
+              header="Descripción"
+              sortable
+              style={{ minWidth: "2rem" }}
+            ></Column>
+            <Column
+              field="price"
+              header="Precio"
+              body={priceBodyTemplate}
+              sortable
+              style={{ minWidth: "1px" }}
+            ></Column>
+            <Column
+              field="stock"
+              header="Stock"
+              sortable
+              style={{ minWidth: "0.5rem" }}
+            ></Column>
+            <Column
+              field="salesCounter"
+              header="Total vendidos"
+              sortable
+              style={{ minWidth: "2rem" }}
+            ></Column>
+            <Column
+              field="category.name"
+              header="Categoria"
+              sortable
+              style={{ minWidth: "2rem" }}
+            ></Column>
+            <Column
+              field="reviews.length"
+              header="Reseñas"
+              sortable
+              style={{ minWidth: "2rem" }}
+            ></Column>
+            <Column
+              header="Acciones"
+              body={actionBodyTemplate}
+              exportable={false}
+              style={{ minWidth: "8rem" }}
+            ></Column>
+          </DataTable>
+        </div>
+  
+        <Dialog
+          visible={productDialog}
+          style={{ width: "450px" }}
+          header="Información de la product"
+          modal
+          className="p-fluid"
+          footer={productDialogFooter}
+          onHide={hideDialog}
         >
-          <Column
-            selectionMode="multiple"
-            headerStyle={{ width: "1rem" }}
-            exportable={false}
-          ></Column>
-          <Column
-            field="id"
-            header="Id"
-            sortable
-            style={{ minWidth: "1rem" }}
-          ></Column>
-          <Column
-            field="image"
-            header="Image"
-            body={imageBodyTemplate}
-          ></Column>
-          <Column
-            field="name"
-            header="Nombre"
-            sortable
-            style={{ minWidth: "2rem" }}
-          ></Column>
-          <Column
-            field="description"
-            header="Descripción"
-            sortable
-            style={{ minWidth: "2rem" }}
-          ></Column>
-          <Column
-            field="price"
-            header="Precio"
-            body={priceBodyTemplate}
-            sortable
-            style={{ minWidth: "1px" }}
-          ></Column>
-          <Column
-            field="stock"
-            header="Stock"
-            sortable
-            style={{ minWidth: "0.5rem" }}
-          ></Column>
-          <Column
-            field="salesCounter"
-            header="Total vendidos"
-            sortable
-            style={{ minWidth: "2rem" }}
-          ></Column>
-          <Column
-            field="category.name"
-            header="Categoria"
-            sortable
-            style={{ minWidth: "2rem" }}
-          ></Column>
-          <Column
-            field="reviews.length"
-            header="Reseñas"
-            sortable
-            style={{ minWidth: "2rem" }}
-          ></Column>
-          <Column
-            header="Acciones"
-            body={actionBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "8rem" }}
-          ></Column>
-        </DataTable>
+          <div className="field">
+            <label htmlFor="name">Nombre</label>
+            <InputText
+              id="name"
+              value={product.name}
+              onChange={(e) => onInputChange(e, "name")}
+              required
+              autoFocus
+              className={classNames({ "p-invalid": submitted && !product.name })}
+            />
+            {submitted && !product.name && (
+              <small className="p-error">El nombre es obligatorio.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="stock">Stock</label>
+            <InputText
+              id="stock"
+              value={product.stock}
+              onChange={(e) => onInputChange(e, "stock")}
+              className={classNames({
+                "p-invalid": submitted && !product.stock,
+              })}
+            />
+            {submitted && !product.stock && (
+              <small className="p-error">El Stock es obligatoria.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="price">Precio</label>
+            <InputText
+              id="price"
+              value={product.price}
+              onChange={(e) => onInputChange(e, "price")}
+              className={classNames({
+                "p-invalid": submitted && !product.price,
+              })}
+            />
+            {submitted && !product.price && (
+              <small className="p-error">El Precio es obligatoria.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="photoUrl">Foto</label>
+            <InputTextarea
+              id="photoUrl"
+              value={product.photoUrl}
+              onChange={(e) => onInputChange(e, "photoUrl")}
+              required
+              rows={3}
+              cols={20}
+              className={classNames({
+                "p-invalid": submitted && !product.photoUrl,
+              })}
+            />
+            {submitted && !product.photoUrl && (
+              <small className="p-error">La Foto es obligatoria es obligatoria.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="description">Descripción</label>
+            <InputTextarea
+              id="description"
+              value={product.description}
+              onChange={(e) => onInputChange(e, "description")}
+              required
+              rows={3}
+              cols={20}
+              className={classNames({
+                "p-invalid": submitted && !product.description,
+              })}
+            />
+            {submitted && !product.description && (
+              <small className="p-error">La descripción es obligatoria.</small>
+            )}
+          </div>
+          <div className="field">
+            <label htmlFor="category">Categoria</label>
+            <Dropdown
+              value={product.category}
+              required
+              options={categories}
+              onChange={(e) => onInputChange(e, "category")}
+              optionLabel="name"
+              placeholder="Selecciona la categoría"
+            />
+            {submitted && !product.category && (
+              <small className="p-error">La categoria es obligatoria.</small>
+            )}
+          </div>
+        </Dialog>
+  
+        <Dialog
+          visible={deleteProductDialog}
+          style={{ width: "450px" }}
+          header="Confirm"
+          modal
+          footer={deleteProductDialogFooter}
+          onHide={hideDeleteProductDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Estas seguro que quiere eliminar: <b>{product.name}</b>?
+              </span>
+            )}
+          </div>
+        </Dialog>
+  
+        <Dialog
+          visible={deleteProductsDialog}
+          style={{ width: "450px" }}
+          header="Confirm"
+          modal
+          footer={deleteProductsDialogFooter}
+          onHide={hideDeleteProductsDialog}
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Estas seguro que deseas eliminar los productos seleccionadas?
+              </span>
+            )}
+          </div>
+        </Dialog>
       </div>
+    )
+    }
 
-      <Dialog
-        visible={productDialog}
-        style={{ width: "450px" }}
-        header="Información de la product"
-        modal
-        className="p-fluid"
-        footer={productDialogFooter}
-        onHide={hideDialog}
-      >
-        <div className="field">
-          <label htmlFor="name">Nombre</label>
-          <InputText
-            id="name"
-            value={product.name}
-            onChange={(e) => onInputChange(e, "name")}
-            required
-            autoFocus
-            className={classNames({ "p-invalid": submitted && !product.name })}
-          />
-          {submitted && !product.name && (
-            <small className="p-error">El nombre es obligatorio.</small>
-          )}
-        </div>
-        <div className="field">
-          <label htmlFor="stock">Stock</label>
-          <InputText
-            id="stock"
-            value={product.stock}
-            onChange={(e) => onInputChange(e, "stock")}
-            className={classNames({
-              "p-invalid": submitted && !product.stock,
-            })}
-          />
-          {submitted && !product.stock && (
-            <small className="p-error">El Stock es obligatoria.</small>
-          )}
-        </div>
-        <div className="field">
-          <label htmlFor="price">Precio</label>
-          <InputText
-            id="price"
-            value={product.price}
-            onChange={(e) => onInputChange(e, "price")}
-            className={classNames({
-              "p-invalid": submitted && !product.price,
-            })}
-          />
-          {submitted && !product.price && (
-            <small className="p-error">El Precio es obligatoria.</small>
-          )}
-        </div>
-        <div className="field">
-          <label htmlFor="photoUrl">Foto</label>
-          <InputTextarea
-            id="photoUrl"
-            value={product.photoUrl}
-            onChange={(e) => onInputChange(e, "photoUrl")}
-            required
-            rows={3}
-            cols={20}
-            className={classNames({
-              "p-invalid": submitted && !product.photoUrl,
-            })}
-          />
-          {submitted && !product.photoUrl && (
-            <small className="p-error">La Foto es obligatoria es obligatoria.</small>
-          )}
-        </div>
-        <div className="field">
-          <label htmlFor="description">Descripción</label>
-          <InputTextarea
-            id="description"
-            value={product.description}
-            onChange={(e) => onInputChange(e, "description")}
-            required
-            rows={3}
-            cols={20}
-            className={classNames({
-              "p-invalid": submitted && !product.description,
-            })}
-          />
-          {submitted && !product.description && (
-            <small className="p-error">La descripción es obligatoria.</small>
-          )}
-        </div>
-        <div className="field">
-          <label htmlFor="category">Categoria</label>
-          <Dropdown
-            value={product.category}
-            required
-            options={categories}
-            onChange={(e) => onInputChange(e, "category")}
-            optionLabel="name"
-            placeholder="Selecciona la categoría"
-          />
-          {submitted && !product.category && (
-            <small className="p-error">La categoria es obligatoria.</small>
-          )}
-        </div>
-      </Dialog>
-
-      <Dialog
-        visible={deleteProductDialog}
-        style={{ width: "450px" }}
-        header="Confirm"
-        modal
-        footer={deleteProductDialogFooter}
-        onHide={hideDeleteProductDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>
-              Estas seguro que quiere eliminar: <b>{product.name}</b>?
-            </span>
-          )}
-        </div>
-      </Dialog>
-
-      <Dialog
-        visible={deleteProductsDialog}
-        style={{ width: "450px" }}
-        header="Confirm"
-        modal
-        footer={deleteProductsDialogFooter}
-        onHide={hideDeleteProductsDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>
-              Estas seguro que deseas eliminar los productos seleccionadas?
-            </span>
-          )}
-        </div>
-      </Dialog>
-    </div>
-  );
+    </ShoopingLayout>
+     )
 };

@@ -1,0 +1,205 @@
+.image-cover{
+    margin: auto;
+    border-radius: 10px 10px;
+    width: auto;
+    height: 14em;
+}
+.image-cover :hover{
+    transform: scale(1.008) ; 
+
+}
+.card-book{
+    margin-left: 50px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    width: 15em;
+    height: 20em;
+    border-radius: 10px;
+}
+.card-book :hover{
+    transform: scale(1.008); 
+}
+.tabview-demo{
+    width: 50%;
+}
+.tabview-demo .tabview-header-icon i, .tabview-demo .tabview-header-icon span {
+    vertical-align: middle;
+}
+
+.tabview-demo .tabview-header-icon span {
+    margin: 0 .5rem;
+}
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+.team-page{
+    margin-top: 100px;
+    gap: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.edit-side{
+    position: relative;
+    width: auto;
+    height: 50%;
+}
+.information{
+    width: auto;
+    position: relative;
+}
+.team-image-info{
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    object-fit: scale-down;
+}
+
+.player-ft{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-style: solid;
+    gap: 15px;
+    border-width: 1px;
+    border-color: #343E4D;
+    width: auto;
+    height: 4em;
+}
+.name-player{
+    text-align: center;
+}
+.arena-side{
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.edit-cancel-buttons{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px 5px;
+}
+.player-image{
+    width: 50px;
+    height: 50px;
+}
+.ft-container{
+    margin: 100px 20px;
+}
+.cancha-container{
+    position: relative;
+}
+.lineup{
+    margin: auto;
+    width: 330px;
+    object-fit: cover;
+}
+.image-cover-add{
+    cursor: pointer;
+    width: 200px;
+    width: 200px;
+    margin-top: 60px;
+    margin-left: 60px;
+    opacity: 0.2;
+    transition: opacity 0.2s, visibility .2s ease-out 100ms
+}
+
+.image-cover-add:hover{
+    opacity: 1.0;
+    transition: opacity 1s, visibility .2s ease-out 100ms
+}
+.firstLine{
+    width: 100%;
+}
+.firstLine td{
+    border-bottom: 2px solid black;
+    width: 100%;
+}
+.table-content{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.header-table{
+    background-color: #6452CE;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.delete-icon{
+    cursor: pointer;
+    font-size: large;
+}
+
+/* Venta */
+.container-p{
+    display: flex;
+    flex-direction: column;
+}
+.product-container{
+    display: flex;
+    flex-direction: row;
+}
+.product-basic{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.product-cart{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.price-counter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
+}
+.reviews-section{
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+}
+.image-product{
+    width: 500px;
+    height: 400px;
+}
+.image-review{
+    margin-top: 30px;
+    margin-right: 25px;
+    width: 40px;
+    height: 40px;
+}
+.test{
+    background-color: #6452CE;
+}
+
+@media only screen and (max-width: 600px) {
+    .team-page{
+        flex-direction: column;
+        margin-top: 250px;
+    }
+    .ft-container{
+        margin-top: 250px;
+    }
+    .arena-side{
+        width: 350px;
+    }
+    .edit-side{
+        margin-top: 80px;
+    }
+    
+}
