@@ -6,14 +6,14 @@ export const userSlice = createSlice({
         users: [],
         currentUser: null,
     }, reducers:{
-        setCurrentUser : (state, action)=>{
-            state.currentUser = action.payload
+        setCurrentUser : (state, {payload})=>{
+            state.currentUser = payload
           },
-          setUsers : (state, action)=>{
-            state.users = action.payload
+          setUsers : (state, {payload})=>{
+            state.users = payload
           },
-          addUser : (state, action)=>{
-            state.users =state.users.push(action.payload)
+          addUser : (state, {payload})=>{
+            state.users.push(payload)
           }
     }
 
