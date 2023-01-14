@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import { BrowserRouter } from 'react-router-dom';
+import { MainRouter } from './router/MainRouter';
+import { Provider } from 'react-redux';
+import { store } from "./store/store";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+          <MainRouter/>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
