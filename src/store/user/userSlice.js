@@ -9,9 +9,7 @@ export const userSlice = createSlice({
         setCurrentUser : (state, {payload})=>{
             state.currentUser = payload
           },
-          setUser : (state, {payload})=>{
-            state.user = payload
-          },
+  
     }
 
 
@@ -19,6 +17,6 @@ export const userSlice = createSlice({
 })
 
 export const {
-    setCurrentUser,
-    setUser
+    setCurrentUser
+
 }= userSlice.actions;

@@ -2,6 +2,7 @@ import { func } from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../../helpers/users/loginUser";
+import { signUp } from "../../helpers/users/signUp";
 import { setCurrentUser, setUser } from "../../store/user/userSlice";
 import "../../style/loginPage.css";
 
@@ -23,20 +24,7 @@ export const LoginPage = () => {
 
 
 
-  useEffect(() => {
-    //si hay usuario guardado in el local storage lo ponemos in el redux store
-    if (localStorage.getItem("user")) {
-      const localUsers = JSON.parse(localStorage.getItem("user"));
-      dispatch(setUser(localUsers))
-      console.log("called");
-
-    }
-    //caso contrario no hay usuario
-    else {
-      dispatch(setUser({}))
-      setUser({});
-    }
-  }, []);
+ 
   
   /**
    * este metodo se encarga de mostrar un warning peronalizado al usuario 
@@ -75,17 +63,19 @@ export const LoginPage = () => {
 /**
  * este metodo se encarga de logear el usuario
  */
-  const login = () => {
+  const login = async () => {
     const currentUser = checkLogin(email, pass);
     //llamar al endopoint de customer y admin para logear 
-      loginUser(email,pass);
-   /* if (currentUser) {
-      dispatch(setCurrentUser(currentUser))
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    } else {
+      const loggedUser=await loginUser(email,pass);
+      console.log(loggedUser)
+      if(loggedUser){
+        dispatch(setCurrentUser(loggedUser))
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      }else{
       //mostrar un mensaje de error que no hay nigun usuario con los datos ingresados
       showWarning("Malas credenciales","red","white");
-    }*/
+      }
+
   }
 
 
@@ -93,7 +83,7 @@ export const LoginPage = () => {
    * este method despues de llamar la method validateUser, 
    * en el caso que los datos son validos ingresera al usuario y lo agrega al localStorage como user
    */
-  function signUp() {
+  async function doSignUp  () {
     const valid = validateUser();
     console.log(valid);
 
@@ -101,16 +91,22 @@ export const LoginPage = () => {
        const newUser = {
          name: name,
          email: registerEmail,
-         pass: registerPass,
-         role: role
+         password: registerPass,
+         role: role,
+         verified:false
        }
  
-       dispatch(setUser(newUser));
-       localStorage.setItem("user", JSON.stringify(newUser));
-       setName("");
-       setRegisterEmail("");
-       setRegisterPass("");
-       showWarning("Se ha registrado el usuario "+name+" exitosamente!","green","white");
+       const resp=await signUp(newUser);
+       if(resp!=null){
+        localStorage.setItem("user", JSON.stringify(newUser));
+        setName("");
+        setRegisterEmail("");
+        setRegisterPass("");
+        showWarning("Se ha registrado el usuario "+name+" exitosamente!","green","white");
+       }else{
+        showWarning("user already exists!","orange","black");
+       }
+       
      } else {
        //showWarning("please fill the fields with correct info");
        showWarning("Porfavor llenar todos los campos","red","white");
@@ -197,7 +193,7 @@ export const LoginPage = () => {
           <input name="registerPass" placeholder="Password" type="password" value={registerPass} onChange={handleOnChange} />
           <div className="admin-cont">Admin:<input name="passInput" type="checkbox" onChange={handleRoleChange} /><br /></div>
 
-          <button onClick={signUp}>Sign up</button>
+          <button onClick={doSignUp}>Sign up</button>
         </div>
       </div>
     </div>

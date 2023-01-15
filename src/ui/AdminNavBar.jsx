@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import kamaleon from "../assets/user.jpeg";
+import { setCurrentUser } from "../store/user/userSlice";
 
 
 export const AdminNavBar = () => {
@@ -15,6 +16,7 @@ export const AdminNavBar = () => {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const menu = useRef(null);
+  const dispatcher=useDispatch();
 
   useEffect(() => {
     if (
@@ -39,7 +41,8 @@ export const AdminNavBar = () => {
     {
       label: "Cerrar Sesión",
       command: () => {
-        // dispatch(startLogout());
+        dispatch(setCurrentUser(null));
+        localStorage.removeItem("currentUser");
       },
     },
   ];
