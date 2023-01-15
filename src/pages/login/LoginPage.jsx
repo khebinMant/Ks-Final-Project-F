@@ -99,7 +99,7 @@ export const LoginPage = () => {
          name: name,
          email: registerEmail,
          pass: registerPass,
-         Role: role
+         role: role
        }
  
        dispatch(setUser(newUser));

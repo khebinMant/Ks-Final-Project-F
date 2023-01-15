@@ -350,6 +350,7 @@ export const ProductPage = () => {
 
   return (
     <ShoopingLayout>
+     <h1 style={{color:"black"}}>ADMIN</h1>
     {
       isLoading ? (
       <Checking />

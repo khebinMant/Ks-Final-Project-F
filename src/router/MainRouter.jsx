@@ -23,6 +23,7 @@ export const MainRouter = () => {
     if(localStorage.getItem("currentUser")){
         const currUSer=JSON.parse(localStorage.getItem("currentUser"));
        dispatch(setCurrentUser(currUSer));
+       console.log(currentUser);
        
     }
   },[])
@@ -35,10 +36,12 @@ export const MainRouter = () => {
         currentUser 
           ?
           <Routes>
-            {/* Si esta logeado y es ADMIN */}
-            <Route path='/products' element={<ProductPage />} />
+            {/* Si esta logeado y es ADMIN */}{
+              currentUser.role==="ADMIN"&&
+            <Route path='/*' element={<ProductPage />} />
+          }
             {/* Si esta logeado y es CUSTOMER */}
-            <Route path='/main' element={<MainPage />} />
+            <Route path='/*' element={<MainPage />} />
             <Route path='/search' element={<SearchProductPage />} />
             <Route path='/product/:id' element={<SelectedProductPage />} />
             <Route path='/cart' element={<CartItemsPage />} />
