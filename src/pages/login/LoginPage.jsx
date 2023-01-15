@@ -70,7 +70,7 @@ export const LoginPage = () => {
       console.log(loggedUser)
       if(loggedUser){
         dispatch(setCurrentUser(loggedUser))
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        localStorage.setItem("currentUser", JSON.stringify(loggedUser));
       }else{
       //mostrar un mensaje de error que no hay nigun usuario con los datos ingresados
       showWarning("Malas credenciales","red","white");

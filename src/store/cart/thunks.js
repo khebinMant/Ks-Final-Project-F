@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux"
 import { postOrder } from "../../helpers/orders/postOrder"
 import { addItemToCart, deleteItemToCart, resetCart, setCurrentCart, setShipmentAddress, updateItemQuantity, updateTotalPrice } from "./cartSlice"
 
@@ -15,6 +16,7 @@ export const startAddItemToCart = (item) =>{
 }
 
 export const startCreateOrder = (shipmentAddress) =>{
+  
     return async (dispatch, getState)=>{
         
         dispatch(setShipmentAddress({shipmentAddress}))
