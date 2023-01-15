@@ -1,6 +1,7 @@
 import { func } from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { loginUser } from "../../helpers/users/loginUser";
 import { setCurrentUser, setUser } from "../../store/user/userSlice";
 import "../../style/loginPage.css";
 
@@ -76,13 +77,15 @@ export const LoginPage = () => {
  */
   const login = () => {
     const currentUser = checkLogin(email, pass);
-    if (currentUser) {
+    //llamar al endopoint de customer y admin para logear 
+      loginUser(email,pass);
+   /* if (currentUser) {
       dispatch(setCurrentUser(currentUser))
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
     } else {
       //mostrar un mensaje de error que no hay nigun usuario con los datos ingresados
       showWarning("Malas credenciales","red","white");
-    }
+    }*/
   }
 
 
