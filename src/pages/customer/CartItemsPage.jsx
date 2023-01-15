@@ -60,7 +60,7 @@ export const CartItemsPage = () => {
         <Toast ref={toast} />
         <ConfirmDialog />
         <div  className='container-p'>
-            <h1>TU CARRITO</h1>
+            <h1 style={{color:'black'}} >TU CARRITO</h1>
             <span>({cart.items.length || 0} artículos)</span>
             <div className='product-container' style={{display:'flex', flexDirection:'row'}}>
                 <div className='product-basic' style={{display:'flex', flexDirection:'column'}}>

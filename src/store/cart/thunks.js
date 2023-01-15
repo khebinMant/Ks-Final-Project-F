@@ -19,8 +19,12 @@ export const startCreateOrder = (shipmentAddress) =>{
   
     return async (dispatch, getState)=>{
         
+        const  currentUser  = getState().users.currentUser
+        console.log(currentUser)
+
         dispatch(setShipmentAddress({shipmentAddress}))
-        const response = await Promise.resolve(postOrder(getState().cart.cart,1));
+
+        const response = await Promise.resolve(postOrder(getState().cart.cart,currentUser.id));
         console.log(response);
 
         //Limpiar el carrito
