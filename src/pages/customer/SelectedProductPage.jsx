@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Checking } from '../../components/Checking';
 import { getProduct } from '../../helpers/products/getProduct';
@@ -8,6 +8,9 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { postReview } from '../../helpers/reviews/postReview';
 import { Rating } from 'primereact/rating';
+import { useDispatch } from 'react-redux';
+import { startAddItemToCart } from '../../store/cart/thunks';
+import { Toast } from 'primereact/toast';
 
 export const SelectedProductPage = () => {
 
@@ -15,9 +18,11 @@ export const SelectedProductPage = () => {
     const [product, setProduct] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
-    const [quanity, setQuanity] = useState(1);
+    const [quantity, setQuanity] = useState(1);
     const [review, setReview] = useState('');
     const [rating, setRaiting] = useState(1);
+    const dispatch = useDispatch();
+    const toast = useRef(null);
 
     const createReview = async () =>{
         if(review==''){
@@ -45,8 +50,25 @@ export const SelectedProductPage = () => {
         setIsLoading(false);
       };
 
+      
+    const showSuccess = () => {
+        toast.current.show({severity:'success', summary: 'Agregado', detail:'Prodcuto agregado al carrito', life: 3000});
+    }
+
+    const addItemToCart = () =>{
+        let _product = {
+            quantity: quantity,
+            price: product.price,
+            productId: product.id
+        }
+        dispatch(startAddItemToCart(_product));
+        showSuccess()
+    }
+
+
   return (
     <ShoopingLayout>
+        <Toast ref={toast} position="bottom-right" />
         {
             isLoading
             ?
@@ -70,10 +92,10 @@ export const SelectedProductPage = () => {
                         <div className="p-fluid grid formgrid">
                             <div className="field col-12 md:col-3">
                                 <label  htmlFor="integeronly"><b>Cantidad</b></label>
-                                <InputNumber style={{marginTop:10}} inputId="integeronly" value={quanity} onValueChange={(e) => setQuanity(e.value)} />
+                                <InputNumber style={{marginTop:10}} inputId="integeronly" value={quantity} onValueChange={(e) => setQuanity(e.value)} />
                             </div>
                         </div>
-                        <Button style={{marginTop:50}} label="Agregar al carrito" icon="pi pi-check" />
+                        <Button onClick={addItemToCart} style={{marginTop:50}} label="Agregar al carrito" icon="pi pi-check" />
                     </div>
                 </div>
                 <div className='reviews-section'>

@@ -2,20 +2,26 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import kamaleon from "../assets/user.jpeg";
+import { Button } from 'primereact/button';
+import { Badge } from 'primereact/badge';
 import "./styles/NavBarFooter.css";
 
 
 export const CustomerNavBar = () => {
+
   const navigation = useNavigate();
   const location = useLocation();
   const [canSearch, setCanSearch] = useState(true);
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const menu = useRef(null);
+
+  const {cart} = useSelector(state => state.cart)
+
 
   useEffect(() => {
     if (
@@ -31,8 +37,21 @@ export const CustomerNavBar = () => {
     setModal(!modal);
   };
 
+  const calcItems = ()=>{
+    if(cart.items){
+      return cart.items.length
+    }
+    else{
+      return 0
+    }
+  }
+
   const onSearch = (e) => {
   };
+
+  const goToCart = () =>{
+    navigation('/cart')
+  }
 
   const itemsLog = [
     {
@@ -74,6 +93,7 @@ export const CustomerNavBar = () => {
       ) : (
         <></>
       )}
+      <i onClick={goToCart} className="pi pi-shopping-cart mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '3rem', marginTop:'15px', cursor:'pointer' }}><Badge  size="large" value={cart.items.length || 0} severity="danger" ></Badge></i>
       <Menu model={itemsLog} popup ref={menu} id="popup_menu" />
       <Avatar
         onClick={(event) => menu.current.toggle(event)}
@@ -87,7 +107,7 @@ export const CustomerNavBar = () => {
 
   return (
     <div>
-      <div /* className="card" */>
+      <div>
         <Menubar
           style={{
             backgroundColor: "#14B8A6",

@@ -183,6 +183,10 @@
     width: 40px;
     height: 40px;
 }
+.image-cover-n{
+    width: 100px;
+    height: 100px;
+}
 .test{
     background-color: #6452CE;
 }

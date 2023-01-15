@@ -3,12 +3,18 @@ import { Route, Routes } from 'react-router-dom'
 import { LoginPage } from '../pages/login/LoginPage'
 import { ProductPage } from '../pages/admin/ProductPage'
 import { MainPage } from '../pages/customer/MainPage'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SearchProductPage } from '../pages/customer/SearchProductPage'
 import { SelectedProductPage } from '../pages/customer/SelectedProductPage'
+import { getCurrentCart } from '../store/cart/thunks'
+import { CartItemsPage } from '../pages/customer/CartItemsPage'
 
 
 export const MainRouter = () => {
+
+  const dispatch = useDispatch()
+
+  dispatch( getCurrentCart() )
 
   const [isLoged, setIsLoged] = useState(true)
   // const currentUser = useSelector((state) => state.users.currentUser);
@@ -28,6 +34,7 @@ export const MainRouter = () => {
             <Route path='/main' element={<MainPage />} />
             <Route path='/search' element={<SearchProductPage />} />
             <Route path='/product/:id' element={<SelectedProductPage />} />
+            <Route path='/cart' element={<CartItemsPage />} />
 
           </Routes> :
           <Routes>
