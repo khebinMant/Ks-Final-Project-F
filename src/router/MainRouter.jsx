@@ -8,29 +8,38 @@ import { SearchProductPage } from '../pages/customer/SearchProductPage'
 import { SelectedProductPage } from '../pages/customer/SelectedProductPage'
 import { getCurrentCart } from '../store/cart/thunks'
 import { CartItemsPage } from '../pages/customer/CartItemsPage'
+import { setCurrentUser } from '../store/user/userSlice'
 
 
 export const MainRouter = () => {
 
   const dispatch = useDispatch()
-
+  const currentUser = useSelector((state) => state.users.currentUser);
   dispatch( getCurrentCart() )
 
-  const [isLoged, setIsLoged] = useState(true)
-  // const currentUser = useSelector((state) => state.users.currentUser);
+  /*al momento de correr el app se va a verficar si hay algun usuario ingresado buscando en el local storage 
+  si hay cuurentUser*/
+   useEffect(()=>{
+    if(localStorage.getItem("currentUser")){
+        const currUSer=JSON.parse(localStorage.getItem("currentUser"));
+       dispatch(setCurrentUser(currUSer));
+       
+    }
+  },[])
+   
 
   return (
     <div>
 
       {
-        isLoged
+        currentUser 
           ?
           <Routes>
             {/* Si esta logeado y es ADMIN */}
+        
             {/* <Route path='/*' element={<ProductPage />} /> */}
             <Route path='/products' element={<ProductPage />} />
-
-            {/* Si esta logeado y es USER */}
+            {/* Si esta logeado y es CUSTOMER */}
             <Route path='/main' element={<MainPage />} />
             <Route path='/search' element={<SearchProductPage />} />
             <Route path='/product/:id' element={<SelectedProductPage />} />
@@ -38,7 +47,7 @@ export const MainRouter = () => {
 
           </Routes> :
           <Routes>
-            <Route path='/login' element={<LoginPage />} />
+            <Route path='*' element={<LoginPage />} />
           </Routes>
 
       }

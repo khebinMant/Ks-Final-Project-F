@@ -9,6 +9,7 @@ import kamaleon from "../assets/user.jpeg";
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 import "./styles/NavBarFooter.css";
+import { setCurrentUser } from "../store/user/userSlice";
 
 
 export const CustomerNavBar = () => {
@@ -21,7 +22,7 @@ export const CustomerNavBar = () => {
   const menu = useRef(null);
 
   const {cart} = useSelector(state => state.cart)
-
+  
 
   useEffect(() => {
     if (
@@ -57,7 +58,12 @@ export const CustomerNavBar = () => {
     {
       label: "Cerrar Sesión",
       command: () => {
-        // dispatch(startLogout());
+        /*
+        al presionar cerar session se va a borrar el current user del local storage
+        y se va a actualizar el current user in el store para null
+        */ 
+        dispatch(setCurrentUser(null));
+        localStorage.removeItem("currentUser");
       },
     },
   ];

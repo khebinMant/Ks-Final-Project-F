@@ -1,0 +1,79 @@
+
+.login-signUp-contianer{
+    height: 100vh;
+    background-color: #020f2c;
+font-family: sans-serif;
+
+}
+.admin-cont{
+    color: white;
+    margin: 10px;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+}
+.wariningContiner{
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    background: black;
+    text-align: center;
+    display: none;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+}
+.outter-contianer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 50px;
+    height: 50vh;
+    margin-right: 50px;
+    align-items: center;
+}
+
+
+.left-signIn{
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    padding-top: 10%;
+}
+h1{
+    color: white;
+    text-align: center;
+}
+
+.divider{
+height: 50%;
+width: 1px;
+background-color: white;
+place-self: center;
+}
+input{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.251);
+    font-family: sans-serif;
+    border-style: none;
+}
+button{
+    border-radius: 5px;
+    padding: 5px;
+    background: rgba(254, 161, 1, 0.747);
+    font-family: sans-serif;
+    color: white;
+    font-size: 1rem;
+}
+button:hover{
+    background-color: white;
+    color: rgba(254, 161, 1, 0.747);
+    font-style: bolder;
+    cursor: pointer;
+
+}
+.right-signUp{
+    display: flex;
+    flex-direction: column;
+}
