@@ -1,0 +1,21 @@
+.updateProfileContaier{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15%;
+}
+
+input{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #cefaf5!important;
+    font-family: sans-serif;
+    border-style: none;
+}
+
+.btnCont{
+    text-align: center;
+    margin-top: 20px;
+}
+.homeBtn {
+    width: 20%;
+}

@@ -98,7 +98,6 @@ export const LoginPage = () => {
  
        const resp=await signUp(newUser);
        if(resp!=null){
-        localStorage.setItem("user", JSON.stringify(newUser));
         setName("");
         setRegisterEmail("");
         setRegisterPass("");

@@ -9,6 +9,7 @@ import { SelectedProductPage } from '../pages/customer/SelectedProductPage'
 import { getCurrentCart } from '../store/cart/thunks'
 import { CartItemsPage } from '../pages/customer/CartItemsPage'
 import { setCurrentUser } from '../store/user/userSlice'
+import UpdateProfile from '../pages/customer/UpdateProfile'
 
 
 export const MainRouter = () => {
@@ -45,6 +46,7 @@ export const MainRouter = () => {
             <Route path='/search' element={<SearchProductPage />} />
             <Route path='/product/:id' element={<SelectedProductPage />} />
             <Route path='/cart' element={<CartItemsPage />} />
+            <Route path='/update-profile' element={<UpdateProfile />} />
 
           </Routes> :
           <Routes>

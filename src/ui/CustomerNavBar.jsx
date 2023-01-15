@@ -58,7 +58,7 @@ export const CustomerNavBar = () => {
     {
       label: "Editar perfil",
       command: () => {
-        // dispatch(startLogout());
+       navigation('/update-profile');
       },
     },
     {
