@@ -25,7 +25,7 @@ export const MainPage = () => {
   }
   return (
     <ShoopingLayout>
-      <h1 style={{color:"black"}}>CUSTOMER</h1>
+      <h1 style={{color:"black"}}>CUSTOMER SHOP</h1>
     {
       isLoading
       ?<Checking/>

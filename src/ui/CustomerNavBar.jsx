@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import kamaleon from "../assets/user.jpeg";
-import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 import "./styles/NavBarFooter.css";
 import { setCurrentUser } from "../store/user/userSlice";
-import { resetCart } from "../store/cart/cartSlice";
+import { setSearchedProduct } from "../store/cart/cartSlice";
 
 
 export const CustomerNavBar = () => {
@@ -18,12 +17,12 @@ export const CustomerNavBar = () => {
   const navigation = useNavigate();
   const location = useLocation();
   const [canSearch, setCanSearch] = useState(true);
-  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const menu = useRef(null);
 
   const {cart} = useSelector(state => state.cart)
-  
+  const { searchedProduct } = useSelector( state => state.cart )
+
 
   useEffect(() => {
     if (
@@ -35,22 +34,10 @@ export const CustomerNavBar = () => {
     }
   }, [location]);
 
-  const handleModal = () => {
-    setModal(!modal);
-  };
-
-  const calcItems = ()=>{
-    if(cart.items){
-      return cart.items.length
-    }
-    else{
-      return 0
-    }
-  }
-
+ 
   const onSearch = (e) => {
+      dispatch(setSearchedProduct(e.target.value));
   };
-
   const goToCart = () =>{
     navigation('/cart')
   }
@@ -77,7 +64,27 @@ export const CustomerNavBar = () => {
   ];
 
   const items = [
-
+    {
+      label:'Inicio',
+      icon:'pi pi-home',
+      command: () => {
+        navigation("/");
+      },
+   },
+   {
+    label:'Buscar',
+    icon:'pi pi-search',
+    command: () => {
+      navigation("/search");
+    },
+   },
+   {
+    label:'Mi carrito',
+    icon:'pi pi-shopping-cart',
+    command: () => {
+      navigation("/cart");
+    },
+   }
   ];
 
   const start = (
@@ -103,6 +110,7 @@ export const CustomerNavBar = () => {
           className="search-input"
           placeholder="Buscar"
           type="text"
+          value={searchedProduct || ''}
         />
       ) : (
         <></>
@@ -129,6 +137,7 @@ export const CustomerNavBar = () => {
             color: "#AAAAAA",
             fontSize: "15px",
             fontWeight: "bold",
+            gap:"50px"
           }}
           model={items}
           start={start}

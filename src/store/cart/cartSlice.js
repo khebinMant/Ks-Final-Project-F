@@ -8,7 +8,8 @@ export const cartSlice = createSlice({
             status:"CREATED",
             shipmentAddress: "",
             items:[]
-        }
+        },
+        searchedProduct:''
     },
     reducers: {
         setCurrentCart:(state,action)=>{
@@ -51,10 +52,13 @@ export const cartSlice = createSlice({
             state.cart.status = "CREATED"
             state.cart.shipmentAddress = "CREATED"
             state.cart.items = []
-        }
+        },
+        setSearchedProduct : (state, {payload})=>{
+            state.searchedProduct = payload
+        },
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { addItemToCart, deleteItemToCart , updateTotalPrice, resetCart, setCurrentCart, updateItemQuantity, setShipmentAddress} = cartSlice.actions;
+export const { addItemToCart, deleteItemToCart , updateTotalPrice, resetCart, setCurrentCart, updateItemQuantity, setShipmentAddress, setSearchedProduct} = cartSlice.actions;

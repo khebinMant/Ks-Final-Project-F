@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
@@ -10,13 +10,10 @@ import { setCurrentUser } from "../store/user/userSlice";
 
 
 export const AdminNavBar = () => {
-  const navigation = useNavigate();
   const location = useLocation();
   const [canSearch, setCanSearch] = useState(true);
-  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const menu = useRef(null);
-  const dispatcher=useDispatch();
 
   useEffect(() => {
     if (
@@ -29,9 +26,6 @@ export const AdminNavBar = () => {
     }
   }, [location]);
 
-  const handleModal = () => {
-    setModal(!modal);
-  };
 
   const onSearch = (e) => {
 
@@ -49,7 +43,6 @@ export const AdminNavBar = () => {
   ];
 
   const items = [
-
   ];
 
   const start = (
@@ -100,6 +93,8 @@ export const AdminNavBar = () => {
             color: "#AAAAAA",
             fontSize: "15px",
             fontWeight: "bold",
+            gap:"50px"
+
           }}
           model={items}
           start={start}

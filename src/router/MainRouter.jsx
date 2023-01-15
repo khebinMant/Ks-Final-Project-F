@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { LoginPage } from '../pages/login/LoginPage'
 import { ProductPage } from '../pages/admin/ProductPage'
@@ -37,16 +37,21 @@ export const MainRouter = () => {
         currentUser 
           ?
           <Routes>
-            {/* Si esta logeado y es ADMIN */}{
-              currentUser.role==="ADMIN"&&
-            <Route path='/*' element={<ProductPage />} />
-          }
-            {/* Si esta logeado y es CUSTOMER */}
-            <Route path='/*' element={<MainPage />} />
-            <Route path='/search' element={<SearchProductPage />} />
-            <Route path='/product/:id' element={<SelectedProductPage />} />
-            <Route path='/cart' element={<CartItemsPage />} />
-            <Route path='/update-profile' element={<UpdateProfile />} />
+            {/* Si esta logeado y es ADMIN */}
+            {
+              currentUser.role==="ADMIN"
+              ? 
+                <Route path='/*' element={<ProductPage />} />
+              :
+              <>
+                {/* Si esta logeado y es CUSTOMER */}
+                <Route path='/*' element={<MainPage />} />
+                <Route path='/search' element={<SearchProductPage />} />
+                <Route path='/product/:id' element={<SelectedProductPage />} />
+                <Route path='/cart' element={<CartItemsPage />} />
+                <Route path='/update-profile' element={<UpdateProfile />} />
+              </>
+            }
 
           </Routes> :
           <Routes>
