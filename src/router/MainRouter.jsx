@@ -27,7 +27,6 @@ export const MainRouter = () => {
           ?
           <Routes>
             {/* Si esta logeado y es ADMIN */}
-            {/* <Route path='/*' element={<ProductPage />} /> */}
             <Route path='/products' element={<ProductPage />} />
 
             {/* Si esta logeado y es USER */}

@@ -55,6 +55,12 @@ export const CustomerNavBar = () => {
 
   const itemsLog = [
     {
+      label: "Editar perfil",
+      command: () => {
+        // dispatch(startLogout());
+      },
+    },
+    {
       label: "Cerrar Sesión",
       command: () => {
         // dispatch(startLogout());
