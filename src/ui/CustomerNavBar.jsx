@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 import "./styles/NavBarFooter.css";
 import { setCurrentUser } from "../store/user/userSlice";
+import { resetCart } from "../store/cart/cartSlice";
 
 
 export const CustomerNavBar = () => {
@@ -69,6 +70,7 @@ export const CustomerNavBar = () => {
         y se va a actualizar el current user in el store para null
         */ 
         dispatch(setCurrentUser(null));
+        localStorage.removeItem("cart")
         localStorage.removeItem("currentUser");
       },
     },

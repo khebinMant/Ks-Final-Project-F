@@ -42,6 +42,7 @@ export const AdminNavBar = () => {
       label: "Cerrar Sesión",
       command: () => {
         dispatch(setCurrentUser(null));
+        localStorage.removeItem("cart")
         localStorage.removeItem("currentUser");
       },
     },
