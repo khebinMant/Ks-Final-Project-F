@@ -1,4 +1,4 @@
-import { userApi } from "../../api/userApi"
+import { backEndApi } from "../../api/backEndApi";
 
 
 export const loginUser = async (email, password) => {
@@ -8,9 +8,9 @@ export const loginUser = async (email, password) => {
             "password": password
         }
         //llamando el endpoint de customer y admin para logear el usuario
-        let resp = await userApi.post("customer/login", loginReq);
+        let resp = await backEndApi.post("customer/login", loginReq);
         if (!resp.data || resp.data == "") {
-            resp = await userApi.post("admin/login", loginReq);
+            resp = await backEndApi.post("admin/login", loginReq);
         }
         return resp.data;
 

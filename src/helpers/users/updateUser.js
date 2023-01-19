@@ -1,5 +1,4 @@
-import { json } from "react-router-dom";
-import { userApi } from "../../api/userApi"
+import { backEndApi } from "../../api/backEndApi";
 
 
 export const updateUser = async (user) => {
@@ -8,9 +7,9 @@ export const updateUser = async (user) => {
         
         //llamando el endpoint de customer y admin para crear usuario
         if(user.role=="ADMIN"){
-             resp = await userApi.put(`admin/update/${user.id}`, user);
+             resp = await backEndApi.put(`admin/update/${user.id}`, user);
         }else{
-             resp = await userApi.put(`customer/update/${user.id}`, user);
+             resp = await backEndApi.put(`customer/update/${user.id}`, user);
         }
         
         

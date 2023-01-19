@@ -1,9 +1,9 @@
-import { productsApi } from "../../api/productsApi"
+import { backEndApi } from "../../api/backEndApi"
 
 export const deleteProduct= async (productId)=>{
     try{
 
-        const resp = await productsApi.delete(`/products/${productId}`)
+        const resp = await backEndApi.delete(`/products/${productId}`)
         return resp.data
 
     }catch(error){
